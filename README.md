@@ -29,6 +29,7 @@ Can't find the framework or the options you need? Checkout the [Contributing gui
     - [Qwik](#qwik)
     - [Svelte](#svelte)
     - [Astro](#astro)
+    - [Solid](#solid)
   - [Contributing](#contributing)
   - [Setup locally](#setup-locally)
 
