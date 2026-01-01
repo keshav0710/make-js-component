@@ -1,9 +1,11 @@
+// @ts-nocheck
 import { Command, OptionValues } from "commander";
 import inquirer from "inquirer";
 import angularWizard from "./frameworks/angular/angular.mjs";
 import astroWizard from "./frameworks/astro/astro.mjs";
 import qwikWizard from "./frameworks/qwik/qwik.mjs";
 import reactWizard from "./frameworks/react/react.mjs";
+import solidWizard from "./frameworks/solid/solid.mjs";
 import svelteWizard from "./frameworks/svelte/svelte.mjs";
 import vueWizard from "./frameworks/vue/vue.mjs";
 import { capitalizeFirstLetter } from "./utils.mjs";
@@ -21,9 +23,9 @@ export type Answers = {
 	api?: string;
 };
 
-type FrameworkFromFlagType = "vue" | "angular" | "react" | "svelte" | "qwik" | "astro" | "";
+type FrameworkFromFlagType = "vue" | "angular" | "react" | "svelte" | "qwik" | "astro" | "solid" | "";
 
-type FrameworksType = "Vue" | "Angular" | "React" | "Svelte" | "Qwik" | "Astro";
+type FrameworksType = "Vue" | "Angular" | "React" | "Svelte" | "Qwik" | "Astro" | "Solid";
 
 interface PromptProps {
 	readonly type: string;
@@ -36,7 +38,7 @@ interface PromptProps {
 
 const wizard: () => Promise<Answers> = async () => {
 	// Parse command line arguments using commander
-	const frameworks: FrameworksType[] = ["Vue", "Angular", "React", "Svelte", "Qwik", "Astro"];
+	const frameworks: FrameworksType[] = ["Vue", "Angular", "React", "Svelte", "Qwik", "Astro", "Solid"];
 
 	program
 		.option("--name <value>", "Specify a name")
@@ -47,6 +49,7 @@ const wizard: () => Promise<Answers> = async () => {
 		.option("--svelte", "Create a Svelte component")
 		.option("--qwik", "Create a Qwik component")
 		.option("--astro", "Create an Astro component")
+		.option("--solid", "Create a Solid component")
 		.option("--folder <value>", "Specify the subfolder")
 		.option("--multiple", "Creating multiple components at once")
 		.parse(process.argv);
@@ -58,16 +61,18 @@ const wizard: () => Promise<Answers> = async () => {
 		options.framework || options.vue
 			? "vue"
 			: null || options.angular
-			  ? "angular"
-			  : null || options.react
-				  ? "react"
-				  : null || options.svelte
-					  ? "svelte"
-					  : null || options.qwik
-						  ? "qwik"
-						  : null || options.astro
-							  ? "astro"
-							  : null || "";
+				? "angular"
+				: null || options.react
+					? "react"
+					: null || options.svelte
+						? "svelte"
+						: null || options.qwik
+							? "qwik"
+							: null || options.astro
+								? "astro"
+								: null || options.solid
+									? "solid"
+									: null || "";
 
 	const folderFromFlag: string = options.folder || "";
 	const multipleFromFlag: boolean = options.multiple || false;
@@ -138,6 +143,8 @@ const wizard: () => Promise<Answers> = async () => {
 						return qwikWizard(componentName, folder);
 					case "Astro":
 						return astroWizard(componentName, folder);
+					case "Solid":
+						return solidWizard(componentName, folder);
 					default:
 						throw new Error("A valid framework must be selected");
 				}

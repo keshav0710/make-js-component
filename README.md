@@ -62,7 +62,7 @@ npx make-js-component --folder <PATH>
 Set which framework your component is for.
 
 ```bash
-npx make-js-component --framework [vue|angular|react|svelte|qwik|astro]
+npx make-js-component --framework [vue|angular|react|svelte|qwik|astro|solid]
 ```
 
 #### --[framework]
@@ -105,6 +105,11 @@ When choosing React, the wizard will ask you if you want to use **TypeScript** o
 
 ### Astro
 > Want to help with Astro components? Check out [Astro related issues](https://github.com/Giuliano1993/make-js-component/issues?q=is%3Aissue+is%3Aopen+label%3AAstro)
+
+### Solid
+> Want to help with Solid components? Check out [Solid related issues](https://github.com/Giuliano1993/make-js-component/issues?q=is%3Aissue+is%3Aopen+label%3ASolid)
+
+When choosing Solid, the wizard will ask you if you want to use **TypeScript** or not, and which **CSS framework** you prefer (Tailwind, CSS Module, or No CSS framework).
 
 ## Contributing
 
